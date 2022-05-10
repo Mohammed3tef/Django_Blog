@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
 
 class RegistrationForm(UserCreationForm):
@@ -24,3 +24,17 @@ class RegistrationForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise ValidationError("Email already used before.. try another one")
         return self.cleaned_data
+
+class ProfileForm(forms.ModelForm):
+
+    profile_pic =forms.ImageField(required=False)
+    bio = forms.CharField(required = False ,widget=forms.Textarea(attrs={"rows":5, "cols":20 ,  'class':'form-control'}))
+    class Meta:
+        model = Profile
+        fields = ["bio",'profile_pic']
+        
+class LoginForm(AuthenticationForm): 
+    username = UsernameField(
+        widget=forms.TextInput(attrs={'class': 'input100', 'autofocus': True, 'placeholder': 'username'})
+    )
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100', 'placeholder': 'password'}))
