@@ -26,9 +26,13 @@ def posts(request):
                'tags': tags, 'user': user, 'popular_posts': popular_posts}
     return render(request, 'home.html', context)
 
+#create
+def post_create(request):
+    form = PostForm()
+    context = {"pt_form": form}
+    return render(request, "post_form.html", context)
 
 # update
-
 def post_update(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
