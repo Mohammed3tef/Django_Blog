@@ -25,3 +25,28 @@ def posts(request):
     context = {'page_obj': page_obj, 'categories': categotries,
                'tags': tags, 'user': user, 'popular_posts': popular_posts}
     return render(request, 'home.html', context)
+
+
+# update
+
+def post_update(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            img = request.FILES.get('image')
+            if (img):
+                if(post.image):
+                    delete_profile_pic(post.image)
+                post.image = img
+            post.user = request.user
+            tag_list = getTags(request.POST.get('post_tags'))
+            post.save()
+            queryset = Tag.objects.filter(name__in=tag_list)
+            post.tags.set(queryset)
+            return HttpResponseRedirect('/')
+    else:
+        form = PostForm(instance=post)
+        context = {"pt_form": form}
+        return render(request, "post_form.html", context)
