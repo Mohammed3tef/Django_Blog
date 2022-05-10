@@ -7,12 +7,14 @@
     <div class="wrap-login200" style="text-align: center;">
     <form class="login100-form validate-form" action="{% url 'register'%}"" method="POST" enctype="multipart/form-data">
         {% csrf_token %} 
-         <span class="login100-form-title ">
+         <span class="login100-form-title mb-5 ">
           Register
         </span>
-        <div class="registe-image mb-3">
-          <img src="{% static 'users/imgs/register.png' %}" width="230" height="230" alt="register-image" srcset="">
+        <div class="row">
+        <div class="registe-image mb-3 col-12 col-md-6" >
+          <img src="{% static 'users/imgs/register.png' %}" width="100%"  alt="register-image" srcset="">
         </div>
+        <div class="col-12 col-md-6">
         {% for non_field_error in user_form.non_field_errors %}
                         <p style="color:red;" class="help is-danger">{{ non_field_error }}</p>
                     {% endfor %}
@@ -59,7 +61,7 @@
 			<span class="txt1">
 				already registered ?
 			</span>
-
+  </div>
 		</div>
     </form>
     <div class=" mx-auto " style="text-align: center;">

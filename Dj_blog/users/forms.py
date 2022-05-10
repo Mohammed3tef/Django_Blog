@@ -6,7 +6,9 @@ from .models import Profile
 
 
 class RegistrationForm(UserCreationForm):
-        
+    username = UsernameField( widget=forms.TextInput(attrs={'class': 'input100', 'autofocus': True, 'placeholder': 'username', }),
+        label="username",help_text="Required letters & digits & (@,.,-,+,_)"
+        )
     email = forms.EmailField(required=True,max_length=100,
                             widget=forms.EmailInput(attrs={'class': 'input100' ,'placeholder': 'email@example.com'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100','placeholder': 'Enter new password'}),
