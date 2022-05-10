@@ -6,6 +6,7 @@
 	<div class="container.fluid">
 		<form method="post">
 			{% csrf_token%}
+            {{form.as_p}}
 			<input type="submit" value="create"  class="btn btn-oulined-success">
 		</form>
 </div>

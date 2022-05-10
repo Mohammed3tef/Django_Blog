@@ -29,8 +29,19 @@ def posts(request):
 #create
 def post_create(request):
     form = PostForm()
-    context = {"pt_form": form}
-    return render(request, "post_form.html", context)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            tag_list = getTags(request.POST.get('post_tags'))
+            post.save()
+            queryset = Tag.objects.filter(name__in=tag_list)
+            post.tags.set(queryset)
+            return HttpResponseRedirect('/')
+    else:
+        context = {"pt_form": form}
+        return render(request, "post_form.html", context)
 
 # update
 def post_update(request, id):
