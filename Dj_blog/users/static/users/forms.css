@@ -1,0 +1,33 @@
+.container #profile_picture_form {
+  color: rgb(7, 7, 7);
+}
+#id_profile_pic {
+  font-size: 1.15rem;
+}
+.container .btn-lg,
+.btn-lg {
+  font-family: Tahoma;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 100px;
+}
+
+.container .btn-lg:hover,
+.btn-lg:hover {
+  cursor: hand;
+  border-color: #2196f3;
+  border-width: 3px;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #2196f3;
+  font-weight: bold;
+}
+
+.container .btn-lg:pressed,
+.btn-lg:hover {
+  rotate: 12;
+}
+.btn-lg {
+  padding: 15px 70px;
+}

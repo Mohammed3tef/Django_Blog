@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.core.exceptions import ValidationError
+from .models import Profile
+
 
 class RegistrationForm(UserCreationForm):
         
@@ -32,7 +34,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["bio",'profile_pic']
-        
+
 class LoginForm(AuthenticationForm): 
     username = UsernameField(
         widget=forms.TextInput(attrs={'class': 'input100', 'autofocus': True, 'placeholder': 'username'})
