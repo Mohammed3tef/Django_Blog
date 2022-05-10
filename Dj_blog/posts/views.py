@@ -65,3 +65,9 @@ def post_update(request, id):
         form = PostForm(instance=post)
         context = {"pt_form": form}
         return render(request, "post_form.html", context)
+
+# delete
+def post_delete(request, num):
+    instance = Post.objects.get(id=num)
+    instance.delete()
+    return HttpResponseRedirect('/')
