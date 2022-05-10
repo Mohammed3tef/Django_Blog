@@ -4,4 +4,5 @@ from posts import views
 urlpatterns = [
     path('', views.posts),
 
+
 ]
