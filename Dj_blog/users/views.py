@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import RegistrationForm, ProfileForm
+from .forms import RegistrationForm, ProfileForm, LoginForm
 from .models import Profile
 from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
@@ -48,5 +48,33 @@ def register(request):
             profile_form = ProfileForm()
         context = {"user_form": user_form, "profile_form": profile_form}
         return render(request, 'users/register.html', context)
+    else:
+        return HttpResponseRedirect("/")
+
+def login_view(request):
+
+    # check if user is already logged in
+    if(not request.user.is_authenticated):
+        if request.method == "POST":
+
+            login_form = LoginForm(data=request.POST)
+            if(login_form.is_valid()):
+                username = request.POST['username']
+                password = request.POST["password"]
+
+                user = authenticate(username=username, password=password)
+                if user is not None:  # user authenticated
+                    login(request, user)
+                    logging.info(user.username + " logged in successfully")
+                    # redirect to user homepage
+                    return HttpResponseRedirect("/")
+                else:
+                    logging.info("cannot login from login page")
+            else:
+                logging.info("invalid login form")
+        else:
+            login_form = LoginForm()
+        context = {"login_form": login_form}
+        return render(request, 'users/login.html', context)
     else:
         return HttpResponseRedirect("/")
