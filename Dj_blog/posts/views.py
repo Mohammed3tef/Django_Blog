@@ -101,3 +101,17 @@ def dislike_post(request, id):
         post.delete()
         return HttpResponse("<h1> this post has been deleted </h1>")
     return HttpResponseRedirect("/post/"+id)
+
+
+def tagPosts(request, tag_id):
+    tag = Tag.objects.get(id=tag_id)
+    posts = tag.post_set.all()
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    categotries = Category.objects.all()
+    tags = Tag.objects.all()[:10]
+    user = request.user
+    context = {'page_obj': page_obj,
+               'categories': categotries, 'tags': tags, 'user': user}
+    return render(request, 'home.html', context)
