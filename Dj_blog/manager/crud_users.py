@@ -36,6 +36,22 @@ def manager_lock_user(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def manager_unlock_user(request, id):
+    """ unlock a specific user and becomes able to login again
+    @params : request  , id"""
+
+    if(is_authorized_admin(request)):
+        user = User.objects.get(pk=id)
+        unlock_user(user)
+        log(request.user.username+" unlocked " + user.username+".")
+        return HttpResponseRedirect("/manager/users")
+    else:
+        return HttpResponseRedirect("/")
+
+
+
+
+
 
 def is_authorized_admin(request):
     if(request.user.is_authenticated):
