@@ -115,3 +115,16 @@ def tagPosts(request, tag_id):
     context = {'page_obj': page_obj,
                'categories': categotries, 'tags': tags, 'user': user}
     return render(request, 'home.html', context)
+
+def categoryPosts(request, cat_id):
+    category = Category.objects.get(id=cat_id)
+    posts = Post.objects.filter(category=category)
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    categotries = Category.objects.all()
+    tags = Tag.objects.all()[:10]
+    user = request.user
+    context = {'page_obj': page_obj,
+               'categories': categotries, 'tags': tags, 'user': user}
+    return render(request, 'home.html', context)
