@@ -26,9 +26,24 @@ def posts(request):
                'tags': tags, 'user': user, 'popular_posts': popular_posts}
     return render(request, 'home.html', context)
 
+#create
+def post_create(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            tag_list = getTags(request.POST.get('post_tags'))
+            post.save()
+            queryset = Tag.objects.filter(name__in=tag_list)
+            post.tags.set(queryset)
+            return HttpResponseRedirect('/')
+    else:
+        context = {"pt_form": form}
+        return render(request, "post_form.html", context)
 
 # update
-
 def post_update(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
@@ -50,3 +65,9 @@ def post_update(request, id):
         form = PostForm(instance=post)
         context = {"pt_form": form}
         return render(request, "post_form.html", context)
+
+# delete
+def post_delete(request, num):
+    instance = Post.objects.get(id=num)
+    instance.delete()
+    return HttpResponseRedirect('/')
