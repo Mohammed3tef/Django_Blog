@@ -103,5 +103,4 @@ def profile(request):
         context = {"user": user, "userprofile": userprofile}
         return render(request, "users/profile.html", context)
     else:
-        return HttpResponseRedirect("/")
-
+        return HttpResponseRedirect("/"

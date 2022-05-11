@@ -1,25 +1,30 @@
 {% extends 'users/base.html' %} {% load static %} {% block content %}
-<div class="container my-5" id="colorlib-main">
+<div class="container my-5  " id="colorlib-main">
   {% include 'users/header.html' %}
-  <div class="container mb-5">
+  <div class="container mb-5 col-4  ">
     {%if userprofile.profile_pic%}
     <img
       src="{{userprofile.profile_pic.url}}"
       alt="user_profile_pic"
       width="400"
       height="400"
+      class="img-fluid rounded-circle " 
     />
     {% else %}
-    <div style="width: 200; height: 200"></div>
+    <div style="width: 200; height: 200" ></div>
     {%endif%}
   </div>
   <div class="container mb-5">
     <h3 class="mb-3">Full Name : {{user.first_name}} {{user.last_name}}</h3>
-
+    <hr />
     <h3 class="mb-3">Email : {{user.email}}</h3>
+    <hr />
 
-    <h4 class="mb-4">Bio :</h4>
-    <h5 class="mb-3">{{user.profile.bio}}</h5>
+    <h4 class="mb-4">
+      Bio :
+      <span class="mb-3">{{user.profile.bio}}</sp>
+    </h4>
+    <hr />
   </div>
 
   <div class="container"></div>
