@@ -4,6 +4,8 @@ from .forms import RegistrationForm, ProfileForm, LoginForm
 from .models import Profile
 from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
+from django.contrib.auth.models import User
+
 import logging
 # Create your views here.
 
@@ -78,3 +80,10 @@ def login_view(request):
         return render(request, 'users/login.html', context)
     else:
         return HttpResponseRedirect("/")
+
+def blocked(request):
+    # this view will be fired when a locked user tries to login
+    if(not request.user.is_authenticated):
+        admins = User.objects.all().filter(is_staff__exact=True)
+        return render(request, "users/blocked.html", {"admins": admins})
+    return HttpResponseRedirect("/")

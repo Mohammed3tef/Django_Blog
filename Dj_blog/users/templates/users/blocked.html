@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %} 
+{% block content %} 
+{% load static %}
+<div class="container align-middle" style="text-align: center;">
+  <img src="{% static 'users/imgs/blocked.webp' %}" alt="blocked pic" />
+</div>
+<div class="container mt-4" style="text-align: center;  ">
+  <h1 class="p-2">you are blocked</h1>
+  <h2 class="p-2">you can contact one of the following admins for further details</h2>
+  {% for admin in admins %}
+  <h2 class="p-2">{{admin.first_name}} {{admin.last_name}} : {{admin.email}}</h2>
+
+  {% endfor %}
+</div>
+<div style="text-align: center;"" class="container mt-4 mb-4"><a class="btn btn-primary" href="/">Homepage</a></div>
+
+{% endblock %}
