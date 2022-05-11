@@ -74,3 +74,22 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = "Categories"
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply = models.ForeignKey('Comment', null=True, related_name="replies", on_delete=models.CASCADE)
+    content = models.TextField(max_length=300)
+    approved = models.BooleanField(default=False)
+    time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return  '{} commented on {}.'.format(str(self.user.username), self.post.title)
+    def get_delete_url(self):
+        return reverse('posts:delete', args=[self.id])
+
+    def filtered_content(self):
+        profane_words = Profanity.objects.all()
+        for profane_word in profane_words:
+            self.content = self.content.replace(str(profane_word), '*' * len(str(profane_word)))
+        return self.content
