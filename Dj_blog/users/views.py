@@ -69,7 +69,7 @@ def login_view(request):
                     login(request, user)
                     logging.info(user.username + " logged in successfully")
                     # redirect to user homepage
-                    return HttpResponseRedirect("/")
+                    return HttpResponseRedirect("/users/profile")
                 else:
                     logging.info("cannot login from login page")
             else:
@@ -79,7 +79,7 @@ def login_view(request):
         context = {"login_form": login_form}
         return render(request, 'users/login.html', context)
     else:
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/users/profile")
 
 def blocked(request):
     # this view will be fired when a locked user tries to login
@@ -87,3 +87,14 @@ def blocked(request):
         admins = User.objects.all().filter(is_staff__exact=True)
         return render(request, "users/blocked.html", {"admins": admins})
     return HttpResponseRedirect("/")
+
+def profile(request):
+    if(request.user.is_authenticated):
+        user = request.user  # get the current user
+        # get the profile related to that user
+        userprofile = Profile.objects.get(user=user)
+        context = {"user": user, "userprofile": userprofile}
+        return render(request, "users/profile.html", context)
+    else:
+        return HttpResponseRedirect("/")
+
