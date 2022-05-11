@@ -79,6 +79,25 @@ def post_delete(request, num):
     return HttpResponseRedirect('/')
 
 
+# to like the post if the user is not in like or dislike tables it will be added one like
+# if the user in one of the tables he must pressed one more time in the same button
+
+
+def like_post(request, id):
+    post = get_object_or_404(Post, pk=id)
+    postIsDisliked = post.dislikes.all()
+    post_isliked = post.likes.all()
+    user = request.user
+    if (user not in post_isliked):
+        if(user not in postIsDisliked):
+            post.likes.add(user)
+            post.save()
+    else:
+        post.likes.remove(user)
+        post.save()
+    return HttpResponseRedirect("/post/"+id)
+
+
 # to dislike the post if the user is not in like or dislike tables it will be added one dislike
 # if the user in one of the tables he must pressed one more time in the same button
 
