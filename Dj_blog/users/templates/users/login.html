@@ -1,60 +1,67 @@
-{% extends 'users/base.html' %} {% load static %} {% block content %} 
+{% extends 'users/base.html' %} {% load static %} {% block content %}
 
 <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login200">
       <form method="POST" class="login100-form validate-form">
         {% csrf_token %}
-        <span class="login100-form-title p-b-26">
-          Welcome
-        </span>
-        <span class="login100-form-title p-b-48">
-          <i class="zmdi zmdi-font"></i>
-        </span>
-        {% for non_field_error in login_form.non_field_errors %}
-        <div class="container" style="text-align:center">
-          <p style="color:red;">incorrect login data</p>
-        </div>
-        {% endfor %} 
-        {% for field in login_form %}
-        <div class="wrap-input100 validate-input">
-          <label for="{{ field.id_for_label }}" class="label">
-            {{ field.label }}
-          </label>
-          {{ field }} {%if field.help_text%}
-          <p class="help">{{field.help_text}}</p>
-          {%endif%} {% for error in field.errors %}
-          <p class="help is-danger">{{ error }}</p>
-          {% endfor %}
-        </div>
-        {% endfor %}
-        <div class="text-center ">
-          <span class="txt1 mr-2">
-            forgot your password?
+        <span class="login100-form-title p-b-26 mb-5"> Login </span>
+        <div class="row">
+          <div class="registe-image mb-3 col-12 col-md-6">
+            <img
+              src="{% static 'users/imgs/login.png' %}"
+              width="100%"
+              alt="register-image"
+              srcset=""
+            />
+          </div>
+          <span class="login100-form-title p-b-48">
+            <i class="zmdi zmdi-font"></i>
           </span>
-          <a class="txt2" href="/users/password-reset">
-            Reset from here
-          </a>
-        </div>
-        <div class="container mt-4" style="text-align: center;">
-          <button class="btn-lg btn-primary" type="submit">Login</button>
-        </div>
-        <div class="text-center p-t-20">
-          <span class="txt1 mr-2">
-            Don’t have an account?
-          </span>
-          <a class="txt2" href="{% url 'register' %}">
-            Sign Up
-          </a>
+          <div class="col-12 col-md-6 mt-5">
+            {% for non_field_error in login_form.non_field_errors %}
+            <div class="container" style="text-align: center">
+              <p style="color: red">incorrect login data</p>
+            </div>
+            {% endfor %} {% for field in login_form %}
+            <div class="wrap-input100 validate-input">
+              <label for="{{ field.id_for_label }}" class="label">
+                {{ field.label }}
+              </label>
+              {{ field }} {%if field.help_text%}
+              <p class="help">{{field.help_text}}</p>
+              {%endif%} {% for error in field.errors %}
+              <p class="help is-danger">{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="text-center">
+              <span class="txt1 mr-2"> forgot your password? </span>
+              <a class="txt2" href="/users/password-reset"> Reset from here </a>
+            </div>
+            <div class="container mt-4" style="text-align: center">
+              <button class="btn-lg btn-primary" type="submit">Login</button>
+            </div>
+            <div class="text-center p-t-20">
+              <span class="txt1 mr-2"> Don’t have an account? </span>
+              <a class="txt2" href="{% url 'register' %}"> Sign Up </a>
+            </div>
+          </div>
         </div>
       </form>
-      <div class=" mx-auto " style="text-align: center;">
-        <a href="/" class="btn  px-5 "> <img width="110" height="100" src="{% static 'users/imgs/back.png' %}"alt="back button image" srcset=""> </a>
+      <div class="mx-auto" style="text-align: center">
+        <a href="/" class="btn px-5">
+          <img
+            width="110"
+            height="100"
+            src="{% static 'users/imgs/back.png' %}"
+            alt="back button image"
+            srcset=""
+          />
+        </a>
       </div>
     </div>
   </div>
 </div>
-
-
 
 {% endblock %}
