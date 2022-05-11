@@ -23,3 +23,22 @@ def manager_show_normal_users(request):
         return render(request, "manager/users.html", {"users": page_users})
     else:
         return HttpResponseRedirect("/")
+
+def manager_lock_user(request, id):
+    """ lock a specific user not to be able to login again but his account is still alive
+    @params : request  , id"""
+
+    if(is_authorized_admin(request)):
+        user = User.objects.get(pk=id)
+        lock_user(user)
+        log(request.user.username+" locked " + user.username+".")
+        return HttpResponseRedirect("/manager/users")
+    else:
+        return HttpResponseRedirect("/")
+
+
+def is_authorized_admin(request):
+    if(request.user.is_authenticated):
+        if(request.user.is_staff):
+            return True
+    return False
