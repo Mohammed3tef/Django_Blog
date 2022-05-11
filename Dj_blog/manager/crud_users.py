@@ -48,6 +48,19 @@ def manager_unlock_user(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def manager_delete_user(request, id):
+    """ delete a specific user not to be able to login and his account is deleted
+    @params : request  , id"""
+
+    if(is_authorized_admin(request)):
+        user = User.objects.get(pk=id)
+        if(user.profile.profile_pic != None):
+            delete_profile_pic(user.profile.profile_pic)
+        user.delete()
+        log(request.user.username+" removed " + user.username+".")
+        return HttpResponseRedirect("/manager/users")
+    else:
+        return HttpResponseRedirect("/")
 
 
 
