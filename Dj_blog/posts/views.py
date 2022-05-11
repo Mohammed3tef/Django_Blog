@@ -143,3 +143,18 @@ def search(request):
     context = {'page_obj': page_obj,
                'categories': categotries, 'tags': tags, 'user': user}
     return render(request, 'home.html', context)
+
+
+def post_detail(request, id):
+    categotries = Category.objects.all()
+    tags = Tag.objects.all()[:10]
+    post = Post.objects.get(id=id)
+    user = request.user
+
+    context = {
+        'post': post,
+        'categories': categotries,
+        'tags': tags,
+        'user': user
+    }
+    return render(request, 'single.html', context)
