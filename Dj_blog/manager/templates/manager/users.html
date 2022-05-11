@@ -1,0 +1,82 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+{% include 'manager/nav.html' %}
+<div class="container-fluid">
+<div class="row">
+  <div class="col md-12 sm-12">
+  <table style="text-align : center;"   class="table  table-lg table-dark ">
+  <thead>
+    <tr style="text-align : center;">
+      <th scope="col">ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">username</th>
+      <th scope="col"> <a style="color:white;" href="/manager/users/sorted/1">Last login</a> </th>
+      <th scope="col"> <a style="color:white;" href="/manager/users/sorted/2">Undesired words count</a></th>
+      <th scope="col">Is Locked</th>
+      <th scope"col" colspan=3 > Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for user in users %}
+ 
+  {% if user.is_staff %}
+        <tr class="bg-danger" >
+  {% else %}
+        <tr  style="background-color:	#5DBCD2">
+  {% endif %}
+  <td >{{user.id}}</td>
+  <td >{{user.first_name}}</td>
+  <td >{{user.last_name}}</td>
+  <td>{{user.username}}</td>
+  <td >{{user.last_login}}</td>
+  <td >{{user.profile.undesired_words_count}}</td>
+  <td >{{user.profile.is_locked}}</td>
+  <td> <a class="btn btn-warning" style="background-color:#ffc507" href="/manager/users/show/{{user.id}}">show</a></td> 
+  {% if user.profile.is_locked %}
+     <td> <a class="btn btn-danger" style="background-color:#ffc507"  href="/manager/users/unlock/{{user.id}}"> Unlock </a></td>
+  {% else %}
+     <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-toggle="modal" data-target="#lockModal{{user.id}}">
+      lock
+    </button></td>
+    
+  {% endif %}
+  <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-toggle="modal" data-target="#deleteModal{{user.id}}">
+    delete
+  </button></td>
+    <td> <a class="btn btn-warning" style="background-color:#ffc507" href="/manager/users/promote/{{user.id}}">promote</a> </td>
+</tr>
+
+{% include "manager/modals.html" %}
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="row " style="text-align:center" >
+    <div class="col">
+        <div class="block-27">
+           
+          {% if users.has_previous %}
+          <div   style="display: inline;" class="m-3">
+              <a class="mx-3" href="?page=1">&laquo; first</a>
+              <a href="?page={{ users.previous_page_number }}">previous</a>
+            </div>
+          {% endif %}
+            <span class="current">
+                Page {{ users.number }} of {{ users.paginator.num_pages }}.
+            </span>
+         
+            {% if users.has_next %}
+              <div style="display: inline;" class="m-3">
+                <a class="mx-3" href="?page={{ users.next_page_number }}">next</a>
+                <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+              </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock  %}

@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% block post_block %}
+{% for post in page_obj %}
+<div class="row pt-md-4">
+    <div class="col-md-12">
+        <div class="blog-entry ftco-animate d-md-flex">
+            <a href="/post/{{post.id}}" class="img img-2" style="background-image: url({{post.image_url}});"></a>
+            <div class="text text-2 pl-md-4">
+                <h3 class="mb-2"><a href="/post/{{post.id}}">{{post.title}}</a></h3>
+                <div class="meta-wrap">
+                    <p class="meta">
+                        <span><i class="icon-calendar mr-2"></i>{{post.date_published}}</span>
+                        <span><a href="/category/{{post.category.id}}"><i class="icon-folder-o mr-2"></i>{{post.category.name}}</a></span>
+                        <span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+                    </p>
+                </div>
+                <p class="mb-4">{{post.snippet}}</p>
+                <p><a href="/post/{{post.id}}" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
+            </div>
+        </div>
+    </div>
+</div><!-- END-->
+{% endfor %}
+<!-- pagination -->
+<div class="row">
+    <div class="col">
+        <div class="block-27">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- end pag -->
+{% endblock %}
