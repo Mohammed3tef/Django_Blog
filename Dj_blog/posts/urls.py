@@ -12,4 +12,5 @@ urlpatterns = [
     path('delpost/<num>', views.post_delete),
     path('post/<int:id>', views.post_detail),
     path('category/<cat_id>', views.categoryPosts),
+    path('editcomment/<int:id>/', views.commentEdit, name='commentEdit'),
 ]
