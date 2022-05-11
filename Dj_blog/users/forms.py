@@ -42,3 +42,13 @@ class LoginForm(AuthenticationForm):
         widget=forms.TextInput(attrs={'class': 'input100', 'autofocus': True, 'placeholder': 'username'})
     )
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100', 'placeholder': 'password'}))
+
+class EditProfileForm(forms.ModelForm):
+    first_name =forms.CharField(widget=forms.TextInput(attrs={'class': 'input100'}))
+    last_name =forms.CharField(widget=forms.TextInput(attrs={'class': 'input100'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input100'}))
+    class Meta:
+        model = User
+        fields =["first_name","last_name","email"]
+
+
