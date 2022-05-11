@@ -26,7 +26,9 @@ def posts(request):
                'tags': tags, 'user': user, 'popular_posts': popular_posts}
     return render(request, 'home.html', context)
 
-#create
+# create
+
+
 def post_create(request):
     form = PostForm()
     if request.method == 'POST':
@@ -44,6 +46,8 @@ def post_create(request):
         return render(request, "post_form.html", context)
 
 # update
+
+
 def post_update(request, id):
     post = get_object_or_404(Post, id=id)
     if request.method == 'POST':
@@ -67,7 +71,47 @@ def post_update(request, id):
         return render(request, "post_form.html", context)
 
 # delete
+
+
 def post_delete(request, num):
     instance = Post.objects.get(id=num)
     instance.delete()
     return HttpResponseRedirect('/')
+
+
+# to dislike the post if the user is not in like or dislike tables it will be added one dislike
+# if the user in one of the tables he must pressed one more time in the same button
+
+
+def dislike_post(request, id):
+    post = get_object_or_404(Post, pk=id)
+    postIsDisliked = post.dislikes.all()
+    post_isliked = post.likes.all()
+    user = request.user
+    if (user not in postIsDisliked):
+        if(user not in post_isliked):
+            post.dislikes.add(user)
+            post.save()
+    else:
+        post.dislikes.remove(user)
+        post.save()
+
+    total = post.dislikes.count()
+    if(total == 10):
+        post.delete()
+        return HttpResponse("<h1> this post has been deleted </h1>")
+    return HttpResponseRedirect("/post/"+id)
+
+
+def tagPosts(request, tag_id):
+    tag = Tag.objects.get(id=tag_id)
+    posts = tag.post_set.all()
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    categotries = Category.objects.all()
+    tags = Tag.objects.all()[:10]
+    user = request.user
+    context = {'page_obj': page_obj,
+               'categories': categotries, 'tags': tags, 'user': user}
+    return render(request, 'home.html', context)
