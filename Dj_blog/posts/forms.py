@@ -12,3 +12,9 @@ class PostForm(forms.ModelForm):
 			'status': forms.Select(attrs={'class': 'custom-select'}),
 			'category': forms.Select(attrs={'class': 'custom-select'}),
 		}
+
+class CommentForm(forms.ModelForm):
+	content = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'reply'}))
+	class Meta:
+		model = Comment
+		fields = ('content',)
