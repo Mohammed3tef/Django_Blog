@@ -5,6 +5,8 @@ from .models import Profile
 from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from .util_funcs import isLocked
+
 
 import logging
 # Create your views here.
@@ -66,10 +68,15 @@ def login_view(request):
 
                 user = authenticate(username=username, password=password)
                 if user is not None:  # user authenticated
-                    login(request, user)
-                    logging.info(user.username + " logged in successfully")
-                    # redirect to user homepage
-                    return HttpResponseRedirect("/users/profile")
+                    if(isLocked(user)):
+                        log(user.username + " blocked user")
+                        # blocked users Page
+                        return HttpResponseRedirect("/users/blocked")
+                    else:
+                        login(request, user)
+                        logging.info(user.username + " logged in successfully")
+                        # homepage
+                        return HttpResponseRedirect("/")
                 else:
                     logging.info("cannot login from login page")
             else:
@@ -82,7 +89,7 @@ def login_view(request):
         return HttpResponseRedirect("/users/profile")
 
 def blocked(request):
-    # this view will be fired when a locked user tries to login
+    # Go to login, You are not allowed to access this page
     if(not request.user.is_authenticated):
         admins = User.objects.all().filter(is_staff__exact=True)
         return render(request, "users/blocked.html", {"admins": admins})
