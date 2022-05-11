@@ -164,14 +164,33 @@ def search(request):
     return render(request, 'home.html', context)
 
 
+
 def post_detail(request, id):
     categotries = Category.objects.all()
     tags = Tag.objects.all()[:10]
     post = Post.objects.get(id=id)
     user = request.user
+    comments = Comment.objects.filter(post=post, reply=None).order_by('-id')
+    
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST or None)
+        if comment_form.is_valid():
+            content = request.POST.get('content')  
+            reply_id = request.POST.get('comment_id')
+            comment_qs = None
+            if reply_id:
+                comment_qs = Comment.objects.get(id=reply_id)
 
+            Comment.objects.create(
+                post=post, user=request.user, content=content, reply=comment_qs)
+            comment_form = CommentForm()
+
+    else:
+        comment_form = CommentForm()
     context = {
         'post': post,
+        'comments': comments,
+        'comment_form': comment_form,
         'categories': categotries,
         'tags': tags,
         'user': user
@@ -197,3 +216,5 @@ def unsubscribe(request, cat_id):
     category = Category.objects.get(id=cat_id)
     category.user.remove(user)
     return HttpResponseRedirect('/')
+
+
