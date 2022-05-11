@@ -62,3 +62,15 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('posts:post_detail', args=[self.id])
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+    user = models.ManyToManyField(
+        User, blank=True, null=True, related_name='categories')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"

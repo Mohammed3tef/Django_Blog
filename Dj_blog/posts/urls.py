@@ -9,4 +9,7 @@ urlpatterns = [
     path('dislike_post/<id>', views.dislike_post, name="dislike_post"),
     path('tag/<tag_id>', views.tagPosts),
 
+    path('delpost/<num>', views.post_delete),
+    path('post/<int:id>', views.post_detail),
+    path('category/<cat_id>', views.categoryPosts),
 ]
