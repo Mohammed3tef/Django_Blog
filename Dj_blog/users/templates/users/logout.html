@@ -1,0 +1,24 @@
+ 
+{% extends 'users/base.html' %} {% load static %} {% block content %}
+
+{% include 'users/header.html' %}
+<style>
+    body{
+        background-color: rgb(194, 197, 197);
+    }
+</style>
+<div id="colorlib-main" >
+<div class="container align-middle " style="text-align: center;" >
+  <img class ="mt-5" src="{% static 'users/imgs/logout.png' %}" alt="logout pic" />
+</div>
+<div class="container mt-4" style="text-align: center;">
+  <h1 class="p-2">you have logged out sucessfully.</h1>
+  <h2 class="p-2">you can login again anytime.</h2>
+  <h2 class="p-2">Hope to see you soon.</h2>
+</div>
+<div  class="container mt-4 mb-4" style="text-align: center;">
+    <a class="btn btn-primary mr-3" href="/">Homepage</a>
+    <a class="btn btn-primary ml-3" href="/users/login">Log back in</a>
+</div>
+</div
+{% endblock %}

@@ -76,7 +76,7 @@ def login_view(request):
                         login(request, user)
                         logging.info(user.username + " logged in successfully")
                         # homepage
-                        return HttpResponseRedirect("/")
+                        return HttpResponseRedirect("/users/blocked")
                 else:
                     logging.info("cannot login from login page")
             else:
