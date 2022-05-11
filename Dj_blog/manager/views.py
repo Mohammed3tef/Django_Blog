@@ -17,3 +17,6 @@ def unlock(request, id):
 def delete(request, id):
     return manager_delete_user(request, id)
 
+def show(request, id):
+    return manager_show_user(request, id)
+

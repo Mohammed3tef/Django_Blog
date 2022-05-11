@@ -62,6 +62,16 @@ def manager_delete_user(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def manager_show_user(request, id):
+    """ show info of specific user all his profile with some additional info only revealed for admins
+    @params : request  , id"""
+
+    if(is_authorized_admin(request)):
+        user = User.objects.get(pk=id)
+        return render(request, "manager/show_user.html", {"user": user})
+    else:
+        return HttpResponseRedirect("/")
+
 
 
 
