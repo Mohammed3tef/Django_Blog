@@ -158,3 +158,23 @@ def post_detail(request, id):
         'user': user
     }
     return render(request, 'single.html', context)
+
+
+def subscribe(request, cat_id):
+    user = request.user
+    category = Category.objects.get(id=cat_id)
+    category.user.add(user)
+    # send email to user after subscription
+    try:
+        send_mail("subscribed to a new category", 'hello ,'+user.first_name+" "+user.last_name+'\nyou have just subscribed to category '+category.name,
+                  'dproject.os40@gmail.com', [user.email], fail_silently=False,)
+    except Exception as ex:
+        log("couldn't send email message"+str(ex))
+    return HttpResponseRedirect('/')
+
+
+def unsubscribe(request, cat_id):
+    user = request.user
+    category = Category.objects.get(id=cat_id)
+    category.user.remove(user)
+    return HttpResponseRedirect('/')

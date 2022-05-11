@@ -12,4 +12,7 @@ urlpatterns = [
     path('post/<int:id>', views.post_detail),
     path('category/<cat_id>', views.categoryPosts),
     path('search', views.search),
+
+    path('subscribe/<cat_id>', views.subscribe),
+    path('unsubscribe/<cat_id>', views.unsubscribe),
 ]
