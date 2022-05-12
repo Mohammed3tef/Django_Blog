@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm
 from django.core.exceptions import ValidationError
 from .models import Profile
 
@@ -51,3 +51,10 @@ class EditProfileForm(forms.ModelForm):
         fields =["first_name","last_name"]
 
 
+class ChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100', 'placeholder': 'old password'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100','placeholder': 'Enter new password'}),
+    label="password",help_text="at least 8 charachters , numbers , symbols or better mix them")
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input100','placeholder': 'Confirm your password'}),
+    label="confirm password")
+    
