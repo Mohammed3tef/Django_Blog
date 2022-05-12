@@ -15,12 +15,27 @@
     {%endif%}
   </div>
   <div class="container mb-5">
-    <h3 class="mb-3">Full Name : {{user.first_name}} {{user.last_name}}</h3>
+    <h3 class="mb-3"> <img
+      src="{% static 'users/imgs/id-card.png' %}"
+      alt="user_profile_pic"
+      width="25"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    /> Full Name : {{user.first_name}} {{user.last_name}}</h3>
     <hr />
-    <h3 class="mb-3">Email : {{user.email}}</h3>
+    <h3 class="mb-3">  <img
+      src="{% static 'users/imgs/email.png' %}"
+      alt="user_profile_pic"
+      width="20"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    /> Email : {{user.email}}</h3>
     <hr />
 
-    <h4 class="mb-4">
+    <h4 class="mb-4"> <img
+      src="{% static 'users/imgs/info.png' %}"
+      alt="user_profile_pic"
+      width="20"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    />
       Bio :
       <span class="mb-3">{{user.profile.bio}}</sp>
     </h4>
