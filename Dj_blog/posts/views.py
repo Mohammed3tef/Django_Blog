@@ -44,6 +44,14 @@ def post_create(request):
         context = {"pt_form": form}
         return render(request, "post_form.html", context)
 
+
+def getTags(string):
+    tag_list = list(string.split(" "))
+    for tag in tag_list:
+        if not Tag.objects.filter(name=tag):
+            Tag.objects.create(name=tag)
+    return tag_list
+
 # update
 
 
