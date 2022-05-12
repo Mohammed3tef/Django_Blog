@@ -6,7 +6,6 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from posts.forms import PostForm, CommentForm
 from users.util_funcs import delete_profile_pic
-from users.logger import log
 from django.core.mail import send_mail
 
 # Create your views here.
@@ -164,18 +163,17 @@ def search(request):
     return render(request, 'home.html', context)
 
 
-
 def post_detail(request, id):
     categotries = Category.objects.all()
     tags = Tag.objects.all()[:10]
     post = Post.objects.get(id=id)
     user = request.user
     comments = Comment.objects.filter(post=post, reply=None).order_by('-id')
-    
+
     if request.method == 'POST':
         comment_form = CommentForm(request.POST or None)
         if comment_form.is_valid():
-            content = request.POST.get('content')  
+            content = request.POST.get('content')
             reply_id = request.POST.get('comment_id')
             comment_qs = None
             if reply_id:
@@ -197,6 +195,7 @@ def post_detail(request, id):
     }
     return render(request, 'single.html', context)
 
+
 def commentEdit(request, id):
     comment = Comment.objects.get(id=id)
     if request.method == 'POST':
@@ -207,7 +206,8 @@ def commentEdit(request, id):
     else:
         form = CommentForm(instance=comment)
     return render(request, 'post_detail.html', {'form': form})
-    
+
+
 def subscribe(request, cat_id):
     user = request.user
     category = Category.objects.get(id=cat_id)
@@ -226,5 +226,3 @@ def unsubscribe(request, cat_id):
     category = Category.objects.get(id=cat_id)
     category.user.remove(user)
     return HttpResponseRedirect('/')
-
-

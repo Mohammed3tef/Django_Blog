@@ -1,0 +1,38 @@
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+<aside id="colorlib-aside" style="background-color:#f8f9fa;width:20%;" role="complementary" class="js-fullheight">
+    <nav id="colorlib-main-menu" role="navigation">
+        <ul>
+            {% if request.user.is_staff %}
+            <li><a  href="/manager">Manage Blog</a></li>
+            {% endif %}
+            {% if not request.user.is_authenticated %}
+            <li><a href="/users/login">Login</a></li>
+            {% endif %}
+            
+            {% if request.user.is_staff %}
+            <li id="create"><a  href="/createpost">Create Post</a></li>
+            {% endif %}
+            <li id="home" class=""><a  href="/">Home</a></li>
+            {% if request.user.is_authenticated %}
+                <li id="profile"><a href="/users/profile">Profile</a></li>
+            {%endif%}
+            {% if request.user.is_authenticated %}
+            <li id="logout"><a  href="/users/logout">Logout</a></li>
+            
+            {% endif %}
+        </ul>
+    </nav>
+</aside>
+<script>
+  create = document.querySelector("#create");
+  home = document.querySelector("#home");
+  profile =document.querySelector("#profile");
+  if (window.location.href.endsWith("createpost")) {
+    create.classList.add("colorlib-active");
+  } else if (window.location.href.endsWith("8000/")) {
+    home.classList.add("colorlib-active");
+  }
+  else if(window.location.href.endsWith("users/profile/")){
+      profile.classList.add("colorlib-active");
+  }
+</script>
