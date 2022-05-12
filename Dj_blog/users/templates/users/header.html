@@ -9,35 +9,35 @@
     <ul>
       {% if request.user.is_staff %}
       <li>
-        <a href="/manager" style="text-align: center; font-size: 30px"
+        <a href="/manager" style="text-align: center; font-size: 20px"
           >Manage Blog</a
         >
       </li>
       {% endif %} {% if not request.user.is_authenticated %}
       <li>
-        <a href="/users/login" style="text-align: center; font-size: 30px"
+        <a href="/users/login" style="text-align: center; font-size: 20px"
           >Login</a
         >
       </li>
       {% endif %} {% if request.user.is_staff %}
       <li id="create">
-        <a href="/createpost" style="text-align: center; font-size: 30px"
+        <a href="/createpost" style="text-align: center; font-size: 20px"
           >Create Post</a
         >
       </li>
       {% endif %}
       <li id="home" class="">
-        <a href="/" style="text-align: center; font-size: 30px">Home</a>
+        <a href="/" style="text-align: center; font-size: 20px">Home</a>
       </li>
       {% if request.user.is_authenticated %}
       <li id="profile">
-        <a href="/users/profile" style="text-align: center; font-size: 30px"
+        <a href="/users/profile" style="text-align: center; font-size: 20px"
           >Profile</a
         >
       </li>
       {%endif%} {% if request.user.is_authenticated %}
       <li id="logout">
-        <a href="/users/logout" style="text-align: center; font-size: 30px"
+        <a href="/users/logout" style="text-align: center; font-size: 20px"
           >Logout</a
         >
       </li>

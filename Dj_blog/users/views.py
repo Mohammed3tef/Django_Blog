@@ -6,9 +6,6 @@ from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .util_funcs import isLocked , delete_profile_pic
-
-
-
 import logging
 # Create your views here.
 
@@ -114,7 +111,7 @@ def edit_profile(request):
             profile_form = ProfileForm(request.POST, request.FILES)
             user = request.user
             if(edit_form.is_valid()):
-                logging.log("valid edit form")
+                logging.info("valid edit form")
                 file = request.FILES.get("profile_pic")
                 user.first_name = request.POST["first_name"]
                 user.last_name = request.POST["last_name"]
@@ -125,10 +122,10 @@ def edit_profile(request):
                     user.profile.profile_pic = file
                 user.save()
                 user.profile.save()
-                logging.log(user.username + "  updated his profile")
+                logging.info(user.username + "  updated his profile")
                 return HttpResponseRedirect("/users/profile")
             else:
-                logging.log("invalid change form")
+                logging.info("invalid change form")
                 return HttpResponseRedirect("/")
         else:
             user = request.user
