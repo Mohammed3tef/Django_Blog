@@ -234,3 +234,9 @@ def unsubscribe(request, cat_id):
     category = Category.objects.get(id=cat_id)
     category.user.remove(user)
     return HttpResponseRedirect('/')
+
+
+def commentDelete(request, post_id, com_id):
+    comment = Comment.objects.get(id=com_id)
+    comment.delete()
+    return HttpResponseRedirect('/post/'+post_id)
