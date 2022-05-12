@@ -197,7 +197,17 @@ def post_detail(request, id):
     }
     return render(request, 'single.html', context)
 
-
+def commentEdit(request, id):
+    comment = Comment.objects.get(id=id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('deletecomment')
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'post_detail.html', {'form': form})
+    
 def subscribe(request, cat_id):
     user = request.user
     category = Category.objects.get(id=cat_id)
