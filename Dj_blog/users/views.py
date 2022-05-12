@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import RegistrationForm, ProfileForm, LoginForm,EditProfileForm
+from .forms import RegistrationForm, ProfileForm, LoginForm,EditProfileForm, ChangePasswordForm
 from .models import Profile
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from .util_funcs import isLocked , delete_profile_pic
@@ -136,5 +136,24 @@ def edit_profile(request):
             profile_form = ProfileForm(data=bio_data)
             context = {"edit_form": edit_form, "profile_form": profile_form}
             return render(request, "users/edit.html", context)
+    else:
+        return HttpResponseRedirect("/")
+
+def change_password(request):
+    if(request.user.is_authenticated):
+        if request.method == 'POST':
+            form = ChangePasswordForm(request.user, request.POST)
+            if form.is_valid():
+                user = form.save()
+                update_session_auth_hash(request, user)
+                logging.info("changed password for "+user.username)
+                return HttpResponseRedirect('/users/profile')
+            else:
+                log("couldn't change password for "+user.username)
+        else:
+            form = ChangePasswordForm(request.user)
+        return render(request, 'users/change_password.html', {
+            'form': form
+        })
     else:
         return HttpResponseRedirect("/")
