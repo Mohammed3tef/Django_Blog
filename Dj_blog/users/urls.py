@@ -13,4 +13,7 @@ urlpatterns = [
     path("profile/edit/",views.edit_profile , name="edit_profile"),
     path("password/change/",views.change_password , name="change_password"),
 
+    path('password-reset/', auth_views.PasswordResetView.as_view(template_name="registration/password_reset_form.html"), name='password_reset'),
+
+
 ]
