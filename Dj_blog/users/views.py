@@ -149,7 +149,7 @@ def change_password(request):
                 logging.info("changed password for "+user.username)
                 return HttpResponseRedirect('/users/profile')
             else:
-                log("couldn't change password for "+user.username)
+                logging.info("couldn't change password for "+user.username)
         else:
             form = ChangePasswordForm(request.user)
         return render(request, 'users/change_password.html', {

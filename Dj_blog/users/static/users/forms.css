@@ -31,3 +31,10 @@
 .btn-lg {
   padding: 15px 70px;
 }
+.e-input input {
+  width: 90% !important;
+  margin: 0 auto;
+  display: block;
+  padding: 6px;
+  border-radius: 5px;
+}
