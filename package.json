@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@popperjs/core": "^2.11.5",
+    "material-design-iconic-font": "^2.2.0",
+    "popper.js": "^1.16.1"
+  }
+}
