@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block main_block %}
+{% load static %}
+<div id="colorlib-page">
+	{% include 'header.html'%}
+	<div id="colorlib-main">
+		<section class="ftco-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-xl-8 py-5 px-md-5">
+					{% block post_block %}
+    				{% endblock %}
+				</div>
+				<div  class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+					<div class="sidebar-box pt-md-4">
+						<form action="/search" class="search-form">
+						<div class="form-group">
+							<span class="icon icon-search"></span>
+							<input type="text" class="form-control" name="q" id="q" value="{{request.GET.q}}" placeholder="Search posts and tags ...">
+						</div>
+						</form>
+					</div>
+				<div class="sidebar-box ftco-animate">
+					<h3 class="sidebar-heading">Categories</h3>
+					<ul class="categories">
+					{% for category in categories %}
+					<li>
+					<a href="/category/{{category.id}}">{{category.name}} <span>{{category.post_set.all|length}}</span></a>
+					{% if user.is_authenticated %}
+						{% if user in category.user.all %}
+							<a class="text-danger" href="/unsubscribe/{{category.id}}">unsubscribe</a>
+						{% else %}
+							<a class="text-info" href="/subscribe/{{category.id}}">subscribe</a>
+						{% endif %}
+					{% endif %}
+					</li>
+					{% endfor %}
+					</ul>
+				</div>
+
+				<div class="sidebar-box ftco-animate">
+					<h3 class="sidebar-heading">Tag Cloud</h3>
+					<ul class="tagcloud">
+					{% for tag in tags %}
+					<a href="/tag/{{tag.id}}" class="tag-cloud-link">{{tag.name}}</a>
+					{% endfor %}
+					</ul>
+				</div>
+			
+				<div class="sidebar-box ftco-animate">
+				<h3 class="sidebar-heading">Popular Articles</h3>
+				{% for popular in popular_posts %}
+				<div class="block-21 mb-4 d-flex">
+					<a href="/post/{{popular.id}}" class="blog-img mr-4" style="background-image: url({{popular.image}});"></a>
+					<div class="text">
+						<h3 class="heading"><a href="/post/{{popular.id}}">{{popular.title}}</a></h3>
+						<div class="meta">
+							<div><a href="/post/{{popular.id}}"><span class="icon-calendar"></span> {{popular.date_published}} </a></div>
+							<div><a href="/post/{{popular.id}}"><span class="icon-person"></span> {{popular.user}}</a></div>
+							<div><a href="/post/{{popular.id}}"><span class="icon-chat"></span> {{popular.comments.count}}</a></div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				
+			</div>
+
+			</div><!-- END COL -->
+			</div>
+		</div>
+	</section>
+	</div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+{% endblock %}
+
