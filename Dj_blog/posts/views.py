@@ -207,6 +207,11 @@ def commentEdit(request, id):
     else:
         form = CommentForm(instance=comment)
     return render(request, 'post_detail.html', {'form': form})
+
+def commentDelete(request, post_id, com_id):
+    comment = Comment.objects.get(id=com_id)
+    comment.delete()
+    return HttpResponseRedirect('/post/'+post_id)
     
 def subscribe(request, cat_id):
     user = request.user
