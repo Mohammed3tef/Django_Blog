@@ -1,0 +1,50 @@
+{% extends 'users/base.html' %} {% load static %} {% block content %}
+<div class="container my-5  " id="colorlib-main">
+  {% include 'users/header.html' %}
+  <div class="container mb-5 col-4 d-flex justify-content-center ">
+    {%if userprofile.profile_pic%}
+    <img
+      src="{{userprofile.profile_pic.url}}"
+      alt="user_profile_pic"
+      width="400"
+      height="400"
+      class="img-fluid rounded-circle " 
+    />
+    {% else %}
+    <div style="width: 200; height: 200" ></div>
+    {%endif%}
+  </div>
+  <div class="container mb-5">
+    <h3 class="mb-3"> <img
+      src="{% static 'users/imgs/id-card.png' %}"
+      alt="user_profile_pic"
+      width="25"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    /> Full Name : {{user.first_name}} {{user.last_name}}</h3>
+    <hr />
+    <h3 class="mb-3">  <img
+      src="{% static 'users/imgs/email.png' %}"
+      alt="user_profile_pic"
+      width="20"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    /> Email : {{user.email}}</h3>
+    <hr />
+
+    <h4 class="mb-4"> <img
+      src="{% static 'users/imgs/info.png' %}"
+      alt="user_profile_pic"
+      width="20"
+      style="padding: 5px 0 15px 0; margin-right: 10px"
+    />
+      Bio :
+      <span class="mb-3">{{user.profile.bio}}</sp>
+    </h4>
+    <hr />
+  </div>
+
+  <div class="container">       
+       <a class="btn px-5 py-2 btn-primary" href="{% url 'edit_profile' %}" >Edit profile</a>
+  </div>
+</div>
+
+{% endblock %}
