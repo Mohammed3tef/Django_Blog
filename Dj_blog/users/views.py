@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import RegistrationForm, ProfileForm, LoginForm
+from .forms import RegistrationForm, ProfileForm, LoginForm,EditProfileForm
 from .models import Profile
 from django.contrib.auth import login, authenticate
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
-from .util_funcs import isLocked
+from .util_funcs import isLocked , delete_profile_pic
+
 
 
 import logging
@@ -69,7 +70,7 @@ def login_view(request):
                 user = authenticate(username=username, password=password)
                 if user is not None:  # user authenticated
                     if(isLocked(user)):
-                        log(user.username + " blocked user")
+                        logging.log(user.username + " blocked user")
                         # blocked users Page
                         return HttpResponseRedirect("/users/blocked")
                     else:
@@ -106,4 +107,37 @@ def profile(request):
         return HttpResponseRedirect("/")
 
 
-
+def edit_profile(request):
+    if(request.user.is_authenticated):
+        if request.method == "POST":
+            edit_form = EditProfileForm(data=request.POST)
+            profile_form = ProfileForm(request.POST, request.FILES)
+            user = request.user
+            if(edit_form.is_valid()):
+                logging.log("valid edit form")
+                file = request.FILES.get("profile_pic")
+                user.first_name = request.POST["first_name"]
+                user.last_name = request.POST["last_name"]
+                user.profile.bio = request.POST["bio"]
+                if(file != None):
+                    if(user.profile.profile_pic != None):
+                        delete_profile_pic(user.profile.profile_pic)
+                    user.profile.profile_pic = file
+                user.save()
+                user.profile.save()
+                logging.log(user.username + "  updated his profile")
+                return HttpResponseRedirect("/users/profile")
+            else:
+                logging.log("invalid change form")
+                return HttpResponseRedirect("/")
+        else:
+            user = request.user
+            user_data = {"first_name": user.first_name,
+                         "last_name": user.last_name}
+            bio_data = {"bio": user.profile.bio}
+            edit_form = EditProfileForm(data=user_data)
+            profile_form = ProfileForm(data=bio_data)
+            context = {"edit_form": edit_form, "profile_form": profile_form}
+            return render(request, "users/edit.html", context)
+    else:
+        return HttpResponseRedirect("/")

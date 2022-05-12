@@ -46,9 +46,8 @@ class LoginForm(AuthenticationForm):
 class EditProfileForm(forms.ModelForm):
     first_name =forms.CharField(widget=forms.TextInput(attrs={'class': 'input100'}))
     last_name =forms.CharField(widget=forms.TextInput(attrs={'class': 'input100'}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input100'}))
     class Meta:
         model = User
-        fields =["first_name","last_name","email"]
+        fields =["first_name","last_name"]
 
 
