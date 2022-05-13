@@ -22,3 +22,6 @@ def show(request, id):
 
 def admins(request):
     return manager_show_admins(request)
+
+def demote(request, id):
+    return super_demote_admin(request, id)
