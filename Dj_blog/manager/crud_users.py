@@ -113,7 +113,79 @@ def super_demote_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def super_lock_admin(request, id):
+    """lock a specific adminr not to be able to login again but keeping his account and permissions alive
+    @params : request  , id"""
 
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            lock_user(user)
+            log(current_user.username+" locked " + user.username+".")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
+def super_unlock_admin(request, id):
+    """unlock a specific adminr  to be able to login again
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            unlock_user(user)
+            log(current_user.username+" unlocked " + user.username+".")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
+def super_delete_admin(request, id):
+    """ delete a specific admin not to be able to login and his account is deleted
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            if(user.profile.profile_pic != None):
+                delete_profile_pic(user.profile.profile_pic)
+            user.delete()
+            log(current_user.username+" removed " + user.username+".")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
+
+def super_promote_admin(request, id):
+    """promote a specific admin to become a super user with the highest permissions
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            promote_to_super_user(user)
+            log(current_user.username+" promoted " +
+                user.username+" to a super user.")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
+def admin_sort(request, num):
+    if(is_authorized_admin(request)):
+        users = User.objects.filter(is_staff__exact=False)
+        if(num == 1):
+            users = users.order_by('-last_login')
+        else:
+            users = users.order_by('-profile__undesired_words_count')
+        paginator = Paginator(users, 5)
+        page_number = request.GET.get('page')
+        page_users = paginator.get_page(page_number)
+        return render(request, "manager/users.html", {"users": page_users})
+    else:
+        return HttpResponseRedirect("/")
 
 
 def is_authorized_admin(request):

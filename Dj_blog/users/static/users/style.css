@@ -110,3 +110,10 @@ form .form-control::placeholder {
   color: white;
   font-size: large;
 }
+.e-input input {
+  width: 90% !important;
+  margin: 0 auto;
+  display: block;
+  padding: 6px;
+  border-radius: 5px;
+}
