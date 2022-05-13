@@ -25,3 +25,18 @@ def admins(request):
 
 def demote(request, id):
     return super_demote_admin(request, id)
+
+def lock_admin(request, id):
+    return super_lock_admin(request, id)
+
+def unlock_admin(request, id):
+    return super_unlock_admin(request, id)
+
+def delete_admin(request, id):
+    return super_delete_admin(request, id)
+
+def promote_admin_to_super(request, id):
+    return super_promote_admin(request, id)
+
+def sort(request, num):
+    return admin_sort(request, num)
