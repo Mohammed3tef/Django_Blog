@@ -26,6 +26,7 @@ path("posts/addcategory", views.add_category),
 
 path("posts/addprofaneword", views.add_profane_word),
 path("posts/delprofaneword/<id>", views.delete_profane_word),
+path("posts/delcategory/<cat_id>", views.delete_category),
 
 
 ]

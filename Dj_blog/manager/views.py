@@ -69,6 +69,14 @@ def add_category(request):
     else:
         return HttpResponseRedirect("/")
 
+def delete_category(request, cat_id):
+    if(is_authorized_admin(request)):
+        category = Category.objects.get(id=cat_id)
+        category.delete()
+        return HttpResponseRedirect('/manage/posts#categories')
+    else:
+        return HttpResponseRedirect("/")
+
 
 def add_profane_word(request):
     if(is_authorized_admin(request)):
