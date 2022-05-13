@@ -72,6 +72,19 @@ def manager_show_user(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def manager_promote_user(request, id):
+    """promote a specific user to become an admin with all determined permissions
+    @params : request  , id"""
+
+    if(is_authorized_admin(request)):
+        user = User.objects.get(pk=id)
+        promote_to_staff(user)
+        log(request.user.username+" promoted " + user.username+".")
+        return HttpResponseRedirect("/manager/users")
+    else:
+        return HttpResponseRedirect("/")
+
+
 def manager_show_admins(request):
     """ show all admin users [admins or super users]
     @params : request """

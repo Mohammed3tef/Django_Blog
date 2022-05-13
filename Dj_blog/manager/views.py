@@ -20,6 +20,9 @@ def delete(request, id):
 def show(request, id):
     return manager_show_user(request, id)
 
+def promote(request, id):
+    return manager_promote_user(request, id)
+
 def admins(request):
     return manager_show_admins(request)
 
