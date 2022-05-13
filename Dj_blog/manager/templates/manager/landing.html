@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+{% include "manager/nav.html" %}
+<h1>posts</h1>
+<div style="text-align:left; " class="ml-3">
+<a class="btn btn-primary my-3" href="/createpost">Create</a>
+</div>
+<div class="container-fluid">
+ <table style="text-align : center;"   class="table table-lg table-dark">
+  <thead>
+    <tr style="text-align : center;">
+      <th scope="col">Post ID</th>
+      <th scope="col">Post Title</th>
+      <th scope="col">Post content</th>
+      <th scope="col">Publish Date</th>
+      <th scope="col">Likes</th>
+      <th scope="col">Dislikes</th>
+      <th scope="col">Author</th>
+      <th scope="col" colspan=3 > Actions</th>
+    </tr>
+  </thead>
+  <tbody>
