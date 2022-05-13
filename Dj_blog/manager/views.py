@@ -54,6 +54,22 @@ def dash(request):
     else:
         return HttpResponseRedirect("/")
 
+def add_category(request):
+    if(is_authorized_admin(request)):
+        form = CategoryForm()
+        if request.method == 'POST':
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                log("form is valid")
+                return HttpResponseRedirect('/manager/posts#categories')
+        else:
+            context = {"pt_form": form}
+            return render(request, "manager/categoryform.html", context)
+    else:
+        return HttpResponseRedirect("/")
+
+
 def add_profane_word(request):
     if(is_authorized_admin(request)):
         form = ProfanityForm()
