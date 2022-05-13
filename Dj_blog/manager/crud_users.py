@@ -114,6 +114,20 @@ def super_lock_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def super_unlock_admin(request, id):
+    """unlock a specific adminr  to be able to login again
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            unlock_user(user)
+            log(current_user.username+" unlocked " + user.username+".")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
 
 
 def is_authorized_admin(request):

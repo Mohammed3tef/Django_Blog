@@ -28,3 +28,6 @@ def demote(request, id):
 
 def lock_admin(request, id):
     return super_lock_admin(request, id)
+
+def unlock_admin(request, id):
+    return super_unlock_admin(request, id)

@@ -13,6 +13,7 @@ path("users/show/<int:id>/", views.show, name="show"),
 path("admins/", views.admins, name="admins"),
 path("admins/demote/<int:id>", views.demote, name="demote"),
 path("admins/lock/<int:id>", views.lock_admin, name="lock_admin"),
+path("admins/unlock/<int:id>", views.unlock_admin, name="unlock_admin"),
 
 
 ]
