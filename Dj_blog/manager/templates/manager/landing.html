@@ -70,5 +70,28 @@
 </tbody>
 </table>
 </div>
-
+<h1 id="forbidden">Profane Words</h1>
+<div style="text-align:left; " class="ml-3">
+<a class="btn btn-primary my-3 "  href="addprofaneword">Add</a>
+</div>
+<div class="container-fluid">
+ <table style="text-align : center;"   class="table table-lg table-dark">
+  <thead>
+    <tr style="text-align : center;">
+      <th scope="col">ID</th>
+      <th scope="col">Profane Word</th>
+      <th scope="col" colspan=2 > Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for profane_word in profane_words %}
+    <tr class="bg-primary">
+  <td >{{profane_word.id}}</td>
+  <td >{{profane_word}}</td> 
+    <td> <a class="btn btn-danger"  href="delprofaneword/{{profane_word.id}}" onclick= "return confirm('are you sure ?');" >delete</a> </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
 {% endblock  %}
