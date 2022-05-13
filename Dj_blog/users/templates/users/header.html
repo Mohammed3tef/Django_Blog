@@ -1,0 +1,98 @@
+{% load static %}
+
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+<aside
+  id="colorlib-aside"
+  style="background-color: #f8f9fa; width: 20%"
+  role="complementary"
+  class="js-fullheight"
+>
+  <nav id="colorlib-main-menu" role="navigation">
+    <ul>
+      {% if request.user.is_staff %}
+      <li>
+        <img
+          src="{% static 'users/imgs/home.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/manager" style="text-align: center; font-size: 20px"
+          >Manage Blog</a
+        >
+      </li>
+      {% endif %} {% if not request.user.is_authenticated %}
+      <li>
+        <img
+          src="{% static 'users/imgs/loginico.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/users/login" style="text-align: center; font-size: 20px"
+          >Login</a
+        >
+      </li>
+      {% endif %} {% if request.user.is_staff %}
+      <li id="create">
+        <img
+          src="{% static 'users/imgs/home.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/createpost" style="text-align: center; font-size: 20px"
+          >Create Post</a
+        >
+      </li>
+      {% endif %}
+      <li id="home">
+        <img
+          src="{% static 'users/imgs/home.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/" style="text-align: center; font-size: 20px">Home</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li id="profile">
+        <img
+          src="{% static 'users/imgs/profile.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/users/profile" style="text-align: center; font-size: 20px"
+          >Profile</a
+        >
+      </li>
+      {%endif%} {% if request.user.is_authenticated %}
+      <li id="logout">
+        <img
+          src="{% static 'users/imgs/logoutico.png' %}"
+          alt="user_profile_pic"
+          width="20"
+          style="padding: 5px 0 15px 0; margin-right: 10px"
+        />
+        <a href="/users/logout" style="text-align: center; font-size: 20px"
+          >Logout</a
+        >
+      </li>
+
+      {% endif %}
+    </ul>
+  </nav>
+</aside>
+<script>
+  create = document.querySelector("#create");
+  home = document.querySelector("#home");
+  profile = document.querySelector("#profile");
+  if (window.location.href.endsWith("createpost")) {
+    create.classList.add("colorlib-active");
+  } else if (window.location.href.endsWith("8000/")) {
+    home.classList.add("colorlib-active");
+  } else if (window.location.href.endsWith("users/profile/")) {
+    profile.classList.add("colorlib-active");
+  }
+</script>

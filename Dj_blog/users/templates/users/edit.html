@@ -1,0 +1,90 @@
+{% extends 'users/base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" href="{% static 'users/forms.css' %}" />
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login200" style="text-align: center">
+      <form
+        class="login100-form validate-form"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <span class="login100-form-title p-b-26"> Edit Personal Data </span>
+        <div class="row">
+          <div class="registe-image mb-3 col-12 col-md-6">
+            <img
+              src="{% static 'users/imgs/edit.png' %}"
+              width="100%"
+              alt="register-image"
+              srcset=""
+            />
+          </div>
+          <div class="col-12 col-md-6 mt-5">
+            {% for field in edit_form %}
+
+            <div
+              class="container wrap-input100 validate-input"
+              style="text-align: left"
+            >
+              <label for="{{ field.id_for_label }}" class="label"
+                >{{ field.label }}</label
+              >
+              <div class="mb-1">{{field}}</div>
+            </div>
+            {% endfor %}
+            <div class="container" style="text-align: left">
+              <div id="profile_picture_form">
+                {% for field in profile_form %}
+                <div class="mb-3">
+                  <label for="{{ field.id_for_label }}" class="label"
+                    >{{ field.label }}</label
+                  >
+                  {% if field.name == "profile_pic"%}
+                  <img
+                    class="ml-2 mr-2"
+                    src="{% static 'users/imgs/images.png' %}"
+                    height="25px"
+                    width="25px"
+                  />
+                  {%endif%} {{field}}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="container mt-5 mb-5" style="text-align: center">
+              <button
+                class="btn-lg btn-primary"
+                type="submit"
+                style="background-color: #f3756b; color: white"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="mx-auto" style="text-align: center">
+        <a href="/users/profile" class="btn px-5">
+          <img
+            width="110"
+            height="100"
+            src="{% static 'users/imgs/previous.png' %}"
+            alt="back button image"
+            srcset=""
+          />
+        </a>
+      </div>
+      <div class="m-5">
+        <a
+          class="btn-lg btn-primary"
+          href="{% url 'change_password' %}"
+          style="background-color: #f3756b; color: white"
+          >change password</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
