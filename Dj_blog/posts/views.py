@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from posts.forms import PostForm, CommentForm
 from users.util_funcs import delete_profile_pic
 from django.core.mail import send_mail
-from users.logger import log
+import logging
 
 # Create your views here.
 
@@ -231,7 +231,7 @@ def subscribe(request, cat_id):
         send_mail("subscribed to a new category", 'hello ,'+user.first_name+" "+user.last_name+'\nyou have just subscribed to category '+category.name,
                   'dproject.os40@gmail.com', [user.email], fail_silently=False,)
     except Exception as ex:
-        log("couldn't send email message"+str(ex))
+        logging.info("couldn't send email message"+str(ex))
     return HttpResponseRedirect('/')
 
 

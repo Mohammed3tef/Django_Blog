@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .crud_users import *
 from posts.models import Post, Tag, Category, Comment, Profanity
 from posts.forms import PostForm, CommentForm, ProfanityForm, CategoryForm
-
+import logging
 # the following views are to control users and admins 
 def users(request):
     return manager_show_normal_users(request)
@@ -61,7 +61,7 @@ def add_category(request):
             form = CategoryForm(request.POST)
             if form.is_valid():
                 form.save()
-                log("form is valid")
+                logging.info("form is valid")
                 return HttpResponseRedirect('/manager/posts#categories')
         else:
             context = {"pt_form": form}
@@ -73,7 +73,7 @@ def delete_category(request, cat_id):
     if(is_authorized_admin(request)):
         category = Category.objects.get(id=cat_id)
         category.delete()
-        return HttpResponseRedirect('/manage/posts#categories')
+        return HttpResponseRedirect('/manager/posts#categories')
     else:
         return HttpResponseRedirect("/")
 
@@ -114,7 +114,7 @@ def add_profane_word(request):
 
 
 def delete_profane_word(request, id):
-    if(is_authorized_admin(is_authorized_admin(request))):
+    if(is_authorized_admin(request)):
         profane_word = Profanity.objects.get(id=id)
         profane_word.delete()
         return HttpResponseRedirect('/manager/posts#forbidden')
