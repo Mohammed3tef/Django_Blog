@@ -144,6 +144,7 @@ def super_delete_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+
 def super_promote_admin(request, id):
     """promote a specific admin to become a super user with the highest permissions
     @params : request  , id"""
