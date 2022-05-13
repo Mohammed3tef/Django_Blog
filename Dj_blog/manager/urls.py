@@ -22,6 +22,10 @@ path("admins/show/<int:id>", views.show, name="show_admin"),
 path("admins/promote/<int:id>", views.promote_admin_to_super, name="promote_admin"),
 
 path("", views.dash),
+path("posts/addcategory", views.add_category),
+path("posts/delcategory/<cat_id>", views.delete_category),
+path("posts/", views.posts, name="main_post_page"),
+
 path("posts/addprofaneword", views.add_profane_word),
 path("posts/delprofaneword/<id>", views.delete_profane_word),
 

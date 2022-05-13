@@ -54,6 +54,41 @@ def dash(request):
     else:
         return HttpResponseRedirect("/")
 
+def add_category(request):
+    if(is_authorized_admin(request)):
+        form = CategoryForm()
+        if request.method == 'POST':
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                log("form is valid")
+                return HttpResponseRedirect('/manager/posts#categories')
+        else:
+            context = {"pt_form": form}
+            return render(request, "manager/categoryform.html", context)
+    else:
+        return HttpResponseRedirect("/")
+
+def delete_category(request, cat_id):
+    if(is_authorized_admin(request)):
+        category = Category.objects.get(id=cat_id)
+        category.delete()
+        return HttpResponseRedirect('/manage/posts#categories')
+    else:
+        return HttpResponseRedirect("/")
+
+def posts(request):
+    if(is_authorized_admin(request)):
+        posts = Post.objects.all()
+        categories = Category.objects.all()
+        profane_words = Profanity.objects.all()
+        context = {'posts': posts, 'categories': categories,
+                   'profane_words': profane_words}
+        return render(request, 'manager/landing.html', context)
+    else:
+        return HttpResponseRedirect("/")
+
+
 def add_profane_word(request):
     if(is_authorized_admin(request)):
         form = ProfanityForm()
