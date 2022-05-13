@@ -21,3 +21,20 @@
     </tr>
   </thead>
   <tbody>
+
+{% for post in posts %}
+
+  <tr class="bg-primary">
+  <td >{{post.id}}</td>
+  <td >{{post.title}}</td>
+  <td >{{post.snippet}}</td>
+  <td >{{post.date_published}}</td>
+  <td >{{post.likes.all.count}}</td>
+  <td >{{post.dislikes.all.count}}</td>
+  <td >{{post.user}}</td>
+  <td > <a class="btn btn-warning" href="/post/{{post.id}}">show</a></td> 
+    <td > <a class="btn btn-danger"  href="post_delete/{{post.id}}" onclick= "return confirm('are you sure ?');" >delete</a> </td>
+    <td > <a class="btn btn-success" href="/updatepost/{{post.id}}">Update</a> </td>
+</tr>
+
+{% endfor %}
