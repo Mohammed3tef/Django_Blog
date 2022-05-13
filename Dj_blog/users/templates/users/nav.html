@@ -1,0 +1,41 @@
+<nav
+  class="navbar navbar-expand-lg navbar navbar-dark  mb-1"
+  style="background-color: #112535;"
+>
+<a class="navbar-brand ml-5" href="/">Home</a>
+  <a class="navbar-brand ml-5" href="/manager">Dashboard</a>
+  
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav m-auto">
+      <li id="admin" class="nav-item ">
+        <a class="nav-link" href="/manager/admins"
+          >Admins <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li id="user" class="nav-item">
+        <a class="nav-link" href="/manager/users">Users</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<script>
+  admin = document.querySelector("#admin");
+  user = document.querySelector("#user");
+  if (window.location.href.endsWith("admins/")) {
+    admin.classList.add("active");
+  } else {
+    user.classList.add("active");
+  }
+</script>

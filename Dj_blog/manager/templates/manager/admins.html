@@ -1,0 +1,109 @@
+{% extends 'users/base.html' %} {% block content %}
+{% include 'manager/nav.html' %}
+<div class="container-fluid">
+<div class="row">
+  <div class="col md-12 sm-6">
+  <table style="text-align : center;" class="table table-lg table-dark">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">username</th>
+        <th scope="col">Last login</th>
+        <th scope="col">Undesired words count</th>
+        <th scope="col">Is Locked</th>
+        <th scope="col">Is Super User</th>
+        <th scope="col" colspan="5">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for admin in admins %}
+     {% if admin == request.user%}
+     <tr style="background-color:	#5DBCD2">
+     <td>{{admin.id}}</td>
+     <td>{{admin.first_name}}</td>
+     <td>{{admin.last_name}}</td>
+     <td>{{admin.username}}</td>
+     <td>{{admin.last_login}}</td>
+     <td>{{admin.profile.undesired_words_count}}</td>
+     <td>{{admin.profile.is_locked}}</td>
+     <td>{{admin.is_superuser}}</td>
+      <td style="background-color:	#5DBCD2" colspan="5" style="text-align:center; padding:15px;">you</td>
+    </tr>
+     {%else%}
+      <tr style="background-color:	#5DBCD2">
+        <td>{{admin.id}}</td>
+        <td>{{admin.first_name}}</td>
+        <td>{{admin.last_name}}</td>
+        <td>{{admin.username}}</td>
+        <td>{{admin.last_login}}</td>
+        <td>{{admin.profile.undesired_words_count}}</td>
+        <td>{{admin.profile.is_locked}}</td>
+        <td>{{admin.is_superuser}}</td>
+        {% if superuser and not admin.is_superuser %}
+        <td><a class="btn btn-warning" style="background-color:#ffc507"  href="/manager/admins/show/{{admin.id}}">show</a></td>
+        {% if admin.profile.is_locked %}
+        <td>
+          <a class="btn btn-danger" style="background-color:#ffc507" href="/manager/admins/unlock/{{admin.id}}"> Unlock </a>
+        </td>
+        {% else %}
+        <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-toggle="modal" data-target="#lockModal{{admin.id}}">
+          lock
+        </button></td>
+        {% endif %}
+        <td><button type="button"  style="background-color:#47464d" class="btn btn-dark" data-toggle="modal" data-target="#deleteModal{{admin.id}}">
+          delete
+        </button></td>
+         <td><button type="button" style="background-color:#47464d" class="btn btn-dark" data-toggle="modal" data-target="#demoteModal{{admin.id}}">
+          demote
+        </button></td>
+        {% comment %} <td><a class="btn btn-danger" href="demote/{{admin.id}}">demote</a></td> {% endcomment %}
+        <td><button type="button" style="background-color:#ffc507" class="btn btn-warning" data-toggle="modal" data-target="#promoteModal{{admin.id}}">
+          promote
+        </button></td>
+        {% else %}
+       <td><a class="btn btn-warning" style="background-color:#ffc507" href="/manager/admin/show/{{admin.id}}">show</a></td>
+        <td>no privilege</td>
+        <td>no privilege</td>
+        <td>no privilege</td>
+        <td>no privilege</td>
+        {% endif %}
+      </tr>
+  {%endif%}
+      
+    {% include "manager/modals.html" %}
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+
+<div class="row " style="text-align:center" >
+    <div class="col">
+        <div class="block-27">
+           
+          {% if admins.has_previous %}
+          <div   style="display: inline;" class="m-3">
+              <a class="mx-3" href="?page=1">&laquo; first</a>
+              <a href="?page={{ admins.previous_page_number }}">previous</a>
+            </div>
+          {% endif %}
+            <span class="current">
+                Page {{ admins.number }} of {{ admins.paginator.num_pages }}.
+            </span>
+         
+            {% if admins.has_next %}
+              <div style="display: inline;" class="m-3">
+                <a class="mx-3" href="?page={{ admins.next_page_number }}">next</a>
+                <a href="?page={{ admins.paginator.num_pages }}">last &raquo;</a>
+              </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}
