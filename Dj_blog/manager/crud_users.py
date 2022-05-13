@@ -100,6 +100,19 @@ def super_demote_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def super_lock_admin(request, id):
+    """lock a specific adminr not to be able to login again but keeping his account and permissions alive
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            lock_user(user)
+            log(current_user.username+" locked " + user.username+".")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
 
 
 

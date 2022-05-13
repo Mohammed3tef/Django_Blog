@@ -8,3 +8,8 @@ def isLocked(user):
 def demote_user(user):
     user.is_staff = False
     user.save()
+    
+def lock_user(user):
+    profile = Profile.objects.get(user=user)
+    profile.is_locked = True
+    profile.save()

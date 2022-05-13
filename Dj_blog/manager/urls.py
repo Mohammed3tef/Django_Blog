@@ -12,6 +12,7 @@ path("users/delete/<int:id>/", views.delete, name="delete"),
 path("users/show/<int:id>/", views.show, name="show"),
 path("admins/", views.admins, name="admins"),
 path("admins/demote/<int:id>", views.demote, name="demote"),
+path("admins/lock/<int:id>", views.lock_admin, name="lock_admin"),
 
 
 ]
