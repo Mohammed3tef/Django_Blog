@@ -37,3 +37,6 @@ def delete_admin(request, id):
 
 def promote_admin_to_super(request, id):
     return super_promote_admin(request, id)
+
+def sort(request, num):
+    return admin_sort(request, num)

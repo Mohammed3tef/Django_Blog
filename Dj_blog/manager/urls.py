@@ -10,6 +10,7 @@ path("users/lock/<int:id>/", views.lock, name="lock"),
 path("users/unlock/<int:id>/", views.unlock, name="unlock"),
 path("users/delete/<int:id>/", views.delete, name="delete"),
 path("users/show/<int:id>/", views.show, name="show"),
+path("users/sorted/<int:num>", views.sort, name="sort"),
 
 path("admins/", views.admins, name="admins"),
 path("admins/demote/<int:id>", views.demote, name="demote"),

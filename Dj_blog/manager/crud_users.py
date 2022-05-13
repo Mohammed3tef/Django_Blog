@@ -159,6 +159,20 @@ def super_promote_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def admin_sort(request, num):
+    if(is_authorized_admin(request)):
+        users = User.objects.filter(is_staff__exact=False)
+        if(num == 1):
+            users = users.order_by('-last_login')
+        else:
+            users = users.order_by('-profile__undesired_words_count')
+        paginator = Paginator(users, 5)
+        page_number = request.GET.get('page')
+        page_users = paginator.get_page(page_number)
+        return render(request, "manager/users.html", {"users": page_users})
+    else:
+        return HttpResponseRedirect("/")
+
 
 def is_authorized_admin(request):
     if(request.user.is_authenticated):
