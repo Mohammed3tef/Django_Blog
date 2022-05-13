@@ -1,22 +1,33 @@
-
 {% comment %} users modals {% endcomment %}
 
 <!-- lock Modal -->
-<div class="modal fade" id="lockModal{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="lockModal{{user.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Lock a user</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <h3 style="color:red;"> are you sure you want to lock that user?</h3>
+        <h3 style="color: red">are you sure you want to lock that user?</h3>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a  href="/manager/users/lock/{{user.id}}" class="btn btn-danger">Yes</a>
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/users/lock/{{user.id}}" class="btn btn-danger">Yes</a>
       </div>
     </div>
   </div>
@@ -24,21 +35,35 @@
 <!-- Modal -->
 
 <!-- delete Modal -->
-<div class="modal fade" id="deleteModal{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal{{user.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete a user</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <h3 style="color:red;">are you sure you want to delete that user?</h3>
+        <h3 style="color: red">are you sure you want to delete that user?</h3>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a  href="/manager/users/delete/{{user.id}}" class="btn btn-danger">Yes</a>
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/users/delete/{{user.id}}" class="btn btn-danger"
+          >Yes</a
+        >
       </div>
     </div>
   </div>
@@ -46,22 +71,39 @@
 <!-- Modal -->
 
 <!-- lock Modal -->
-<div class="modal fade" id="lockModal{{admin.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="lockModal{{admin.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Lock a admin</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <h3 style="color:red;"> are you sure you want to lock that admin?</h3><br>
-       <p>note that a locked admin can be unlocked and be able to login again.</p>
+        <h3 style="color: red">are you sure you want to lock that admin?</h3>
+        <br />
+        <p>
+          note that a locked admin can be unlocked and be able to login again.
+        </p>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a  href="/manager/admins/lock/{{admin.id}}" class="btn btn-danger">Yes</a>
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/admins/lock/{{admin.id}}" class="btn btn-danger"
+          >Yes</a
+        >
       </div>
     </div>
   </div>
@@ -69,23 +111,44 @@
 <!-- Modal -->
 
 <!-- promote Modal -->
-<div class="modal fade" id="promoteModal{{admin.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="promoteModal{{admin.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">promote an admin to super user</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">
+          promote an admin to super user
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <h3 style="color:red;"> are you sure you want to promote that admin to super user?</h3> 
-       <br>
-       <p>note that you no longer can control that admin after promotion. only database admin can</p>
+        <h3 style="color: red">
+          are you sure you want to promote that admin to super user?
+        </h3>
+        <br />
+        <p>
+          note that you no longer can control that admin after promotion. only
+          database admin can
+        </p>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a  href="/manager/admins/promote/{{admin.id}}" class="btn btn-danger">Yes</a>
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/admins/promote/{{admin.id}}" class="btn btn-danger"
+          >Yes</a
+        >
       </div>
     </div>
   </div>
@@ -93,25 +156,77 @@
 <!-- Modal -->
 
 <!-- delete Modal -->
-<div class="modal fade" id="deleteModal{{admin.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal{{admin.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete an admin</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-      <h3 style="color:red;"> are you sure you want to delete that admin?</h3> <br>
-      <p>note that a deleted admin can never login again.</p>
+        <h3 style="color: red">are you sure you want to delete that admin?</h3>
+        <br />
+        <p>note that a deleted admin can never login again.</p>
       </div>
       <div class="modal-footer">
-        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
-        <a  href="/manager/admins/delete/{{admin.id}}" class="btn btn-danger">Yes</a>
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/admins/delete/{{admin.id}}" class="btn btn-danger"
+          >Yes</a
+        >
       </div>
     </div>
   </div>
 </div>
 <!-- Modal -->
 
+<!-- lock Modal -->
+<div
+  class="modal fade"
+  id="demoteModal{{admin.id}}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Demote an admin</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 style="color: red">are you sure you want to demote that admin?</h3>
+        <br />
+        <p>note that this admin will not be able to manage the blog again.</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a href="/manager/admins/demote/{{admin.id}}" class="btn btn-danger"
+          >Yes</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
