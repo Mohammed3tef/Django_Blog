@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from posts.forms import PostForm, CommentForm
 from users.util_funcs import delete_profile_pic
 from django.core.mail import send_mail
+from users.logger import log
 
 # Create your views here.
 
@@ -216,6 +217,11 @@ def commentEdit(request, id):
     return render(request, 'post_detail.html', {'form': form})
 
 
+def commentDelete(request, post_id, com_id):
+    comment = Comment.objects.get(id=com_id)
+    comment.delete()
+    return HttpResponseRedirect('/post/'+post_id)
+    
 def subscribe(request, cat_id):
     user = request.user
     category = Category.objects.get(id=cat_id)
