@@ -31,3 +31,6 @@ def lock_admin(request, id):
 
 def unlock_admin(request, id):
     return super_unlock_admin(request, id)
+
+def delete_admin(request, id):
+    return super_delete_admin(request, id)
