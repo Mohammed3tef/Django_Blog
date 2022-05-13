@@ -88,6 +88,15 @@ def posts(request):
     else:
         return HttpResponseRedirect("/")
 
+def post_delete(request, post_id):
+    if(is_authorized_admin(request)):
+        post = Post.objects.get(id=post_id)
+        post.delete()
+        return HttpResponseRedirect('/manager/posts')
+    else:
+        return HttpResponseRedirect("/")
+
+
 
 def add_profane_word(request):
     if(is_authorized_admin(request)):
