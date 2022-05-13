@@ -91,3 +91,27 @@
   </div>
 </div>
 <!-- Modal -->
+
+<!-- delete Modal -->
+<div class="modal fade" id="deleteModal{{admin.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete an admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <h3 style="color:red;"> are you sure you want to delete that admin?</h3> <br>
+      <p>note that a deleted admin can never login again.</p>
+      </div>
+      <div class="modal-footer">
+        <a  class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a  href="/manager/admins/delete/{{admin.id}}" class="btn btn-danger">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
