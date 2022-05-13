@@ -31,3 +31,13 @@ def delete_profile_pic(profile_pic):
             log("profile pic has been deleted")
     except Exception as ex:
         log("no pic"+str(ex))
+
+def promote_to_staff(user):
+    """this function can be used to promot a normal user to be a staff user with the required permissions"""
+    user.is_staff = True
+    user.save()
+
+def promote_to_super_user(user):
+    promote_to_staff(user)
+    user.is_superuser = True
+    user.save()

@@ -144,6 +144,21 @@ def super_delete_admin(request, id):
     else:
         return HttpResponseRedirect("/")
 
+def super_promote_admin(request, id):
+    """promote a specific admin to become a super user with the highest permissions
+    @params : request  , id"""
+
+    current_user = request.user
+    if(is_authorized_admin(request)):
+        if(current_user.is_superuser):
+            user = User.objects.get(pk=id)
+            promote_to_super_user(user)
+            log(current_user.username+" promoted " +
+                user.username+" to a super user.")
+        return HttpResponseRedirect("/manager/admins")
+    else:
+        return HttpResponseRedirect("/")
+
 
 def is_authorized_admin(request):
     if(request.user.is_authenticated):
