@@ -1,5 +1,5 @@
-{% extends 'users/base.html' %} {% block content %} {% include
-"manager/nav.html" %}
+{% extends 'users/base.html' %} {% block content %} 
+{% include 'manager/nav.html' %}
 <h1>posts</h1>
 <div style="text-align: left" class="ml-3">
   <a class="btn btn-primary my-3" href="/createpost">Create</a>
@@ -33,7 +33,7 @@
         <td>
           <a
             class="btn btn-danger"
-            href="/post_delete/{{post.id}}"
+            href="delpost/{{post.id}}"
             onclick="return confirm('are you sure ?');"
             >delete</a
           >
