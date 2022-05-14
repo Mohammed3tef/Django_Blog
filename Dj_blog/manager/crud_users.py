@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from users.models import Profile
 from django.contrib.auth.models import User
-from users.logger import log
+import logging
 from users.util_funcs import *
 from django.core.paginator import Paginator
 import os
@@ -31,7 +31,7 @@ def manager_lock_user(request, id):
     if(is_authorized_admin(request)):
         user = User.objects.get(pk=id)
         lock_user(user)
-        log(request.user.username+" locked " + user.username+".")
+        logging.info(request.user.username+" locked " + user.username+".")
         return HttpResponseRedirect("/manager/users")
     else:
         return HttpResponseRedirect("/")
@@ -43,7 +43,7 @@ def manager_unlock_user(request, id):
     if(is_authorized_admin(request)):
         user = User.objects.get(pk=id)
         unlock_user(user)
-        log(request.user.username+" unlocked " + user.username+".")
+        logging.info(request.user.username+" unlocked " + user.username+".")
         return HttpResponseRedirect("/manager/users")
     else:
         return HttpResponseRedirect("/")
@@ -57,7 +57,7 @@ def manager_delete_user(request, id):
         if(user.profile.profile_pic != None):
             delete_profile_pic(user.profile.profile_pic)
         user.delete()
-        log(request.user.username+" removed " + user.username+".")
+        logging.info(request.user.username+" removed " + user.username+".")
         return HttpResponseRedirect("/manager/users")
     else:
         return HttpResponseRedirect("/")
@@ -79,7 +79,7 @@ def manager_promote_user(request, id):
     if(is_authorized_admin(request)):
         user = User.objects.get(pk=id)
         promote_to_staff(user)
-        log(request.user.username+" promoted " + user.username+".")
+        logging.info(request.user.username+" promoted " + user.username+".")
         return HttpResponseRedirect("/manager/users")
     else:
         return HttpResponseRedirect("/")
@@ -108,7 +108,7 @@ def super_demote_admin(request, id):
         if(current_user.is_superuser):
             user = User.objects.get(pk=id)
             demote_user(user)
-            log(current_user.username+" demoted " + user.username+".")
+            logging.info(current_user.username+" demoted " + user.username+".")
         return HttpResponseRedirect("/manager/admins")
     else:
         return HttpResponseRedirect("/")
@@ -122,7 +122,7 @@ def super_lock_admin(request, id):
         if(current_user.is_superuser):
             user = User.objects.get(pk=id)
             lock_user(user)
-            log(current_user.username+" locked " + user.username+".")
+            logging.info(current_user.username+" locked " + user.username+".")
         return HttpResponseRedirect("/manager/admins")
     else:
         return HttpResponseRedirect("/")
@@ -136,7 +136,7 @@ def super_unlock_admin(request, id):
         if(current_user.is_superuser):
             user = User.objects.get(pk=id)
             unlock_user(user)
-            log(current_user.username+" unlocked " + user.username+".")
+            logging.info(current_user.username+" unlocked " + user.username+".")
         return HttpResponseRedirect("/manager/admins")
     else:
         return HttpResponseRedirect("/")
@@ -152,7 +152,7 @@ def super_delete_admin(request, id):
             if(user.profile.profile_pic != None):
                 delete_profile_pic(user.profile.profile_pic)
             user.delete()
-            log(current_user.username+" removed " + user.username+".")
+            logging.info(current_user.username+" removed " + user.username+".")
         return HttpResponseRedirect("/manager/admins")
     else:
         return HttpResponseRedirect("/")
@@ -167,7 +167,7 @@ def super_promote_admin(request, id):
         if(current_user.is_superuser):
             user = User.objects.get(pk=id)
             promote_to_super_user(user)
-            log(current_user.username+" promoted " +
+            logging.info(current_user.username+" promoted " +
                 user.username+" to a super user.")
         return HttpResponseRedirect("/manager/admins")
     else:

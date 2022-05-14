@@ -84,7 +84,7 @@ def post_update(request, id):
 def post_delete(request, num):
     instance = Post.objects.get(id=num)
     instance.delete()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/manager/posts#post')
 
 
 # to like the post if the user is not in like or dislike tables it will be added one like

@@ -23,7 +23,7 @@ path("admins/promote/<int:id>", views.promote_admin_to_super, name="promote_admi
 
 path("", views.dash),
 path("posts/addcategory", views.add_category),
-path("posts/delpost/<post_id>", views.post_delete),
+# path("posts/delpost/<post_id>", views.post_delete),
 path("posts/delcategory/<cat_id>", views.delete_category),
 path("posts/", views.posts, name="main_post_page"),
 

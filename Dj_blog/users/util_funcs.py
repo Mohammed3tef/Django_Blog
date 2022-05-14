@@ -1,6 +1,6 @@
 from .models import Profile
 from Dj_blog.settings import BASE_DIR
-from users.logger import log
+import logging
 import os
 
 def isLocked(user):
@@ -28,9 +28,9 @@ def delete_profile_pic(profile_pic):
             pass
         else:
             os.remove(pic_url)
-            log("profile pic has been deleted")
+            logging.info("profile pic has been deleted")
     except Exception as ex:
-        log("no pic"+str(ex))
+        logging.info("no pic"+str(ex))
 
 def promote_to_staff(user):
     """this function can be used to promot a normal user to be a staff user with the required permissions"""
