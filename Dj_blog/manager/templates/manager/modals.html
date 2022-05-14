@@ -16,7 +16,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
         <h3 style="color: red">are you sure you want to lock that user?</h3>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/users/lock/{{user.id}}" class="btn btn-danger">Yes</a>
       </div>
     </div>
@@ -50,7 +50,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -60,7 +60,7 @@
         <h3 style="color: red">are you sure you want to delete that user?</h3>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/users/delete/{{user.id}}" class="btn btn-danger"
           >Yes</a
         >
@@ -86,7 +86,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -100,7 +100,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/admins/lock/{{admin.id}}" class="btn btn-danger"
           >Yes</a
         >
@@ -128,7 +128,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -145,7 +145,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/admins/promote/{{admin.id}}" class="btn btn-danger"
           >Yes</a
         >
@@ -171,7 +171,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -183,7 +183,7 @@
         <p>note that a deleted admin can never login again.</p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/admins/delete/{{admin.id}}" class="btn btn-danger"
           >Yes</a
         >
@@ -209,7 +209,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close"
         >
           <span aria-hidden="true">&times;</span>
@@ -221,7 +221,7 @@
         <p>note that this admin will not be able to manage the blog again.</p>
       </div>
       <div class="modal-footer">
-        <a class="btn btn-secondary" data-dismiss="modal">Close</a>
+        <a class="btn btn-secondary" data-bs-dismiss="modal">Close</a>
         <a href="/manager/admins/demote/{{admin.id}}" class="btn btn-danger"
           >Yes</a
         >

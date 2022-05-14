@@ -42,7 +42,7 @@
         <td>{{admin.profile.is_locked}}</td>
         <td>{{admin.is_superuser}}</td>
         {% if superuser and not admin.is_superuser %}
-        <td><a class="btn btn-warning" style="background-color:#ffc507"  href="/admins/show/{{admin.id}}">show</a></td>
+        <td><a class="btn btn-warning" style="background-color:#ffc507"  href="/manager/admins/show/{{admin.id}}">show</a></td>
         {% if admin.profile.is_locked %}
         <td>
           <a class="btn btn-danger" style="background-color:#ffc507" href="/manager/admins/unlock/{{admin.id}}"> Unlock </a>
