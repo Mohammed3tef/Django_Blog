@@ -67,7 +67,7 @@ def login_view(request):
                 user = authenticate(username=username, password=password)
                 if user is not None:  # user authenticated
                     if(isLocked(user)):
-                        logging.log(user.username + " blocked user")
+                        logging.info(user.username + " blocked user")
                         # blocked users Page
                         return HttpResponseRedirect("/users/blocked")
                     else:
