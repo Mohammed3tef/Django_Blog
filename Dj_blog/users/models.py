@@ -12,7 +12,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
-        verbose_name="profile picture", storage=fs, default='defaultAvatar.png')
+        verbose_name="profile picture", storage=fs, default='image_1.jpg')
     undesired_words_count = models.IntegerField(default=0)
     is_locked = models.BooleanField(default=False)
     bio = models.TextField(max_length=200, default="")

@@ -24,7 +24,7 @@ def unlock_user(user):
 def delete_profile_pic(profile_pic):
     try:
         pic_url = BASE_DIR+profile_pic.url
-        if(pic_url.endswith("defaultImage.png")):
+        if(pic_url.endswith("image_1.jpg")):
             pass
         else:
             os.remove(pic_url)
