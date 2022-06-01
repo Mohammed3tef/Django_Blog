@@ -37,12 +37,12 @@
   {% if user.profile.is_locked %}
      <td> <a class="btn btn-danger" style="background-color:#ffc507"  href="/manager/users/unlock/{{user.id}}"> Unlock </a></td>
   {% else %}
-     <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-toggle="modal" data-target="#lockModal{{user.id}}">
+     <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-bs-toggle="modal" data-bs-target="#lockModal{{user.id}}">
       lock
     </button></td>
     
   {% endif %}
-  <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-toggle="modal" data-target="#deleteModal{{user.id}}">
+  <td><button type="button" class="btn btn-dark" style="background-color:#47464d" data-bs-toggle="modal" data-bs-target="#deleteModal{{user.id}}">
     delete
   </button></td>
     <td> <a class="btn btn-warning" style="background-color:#ffc507" href="/manager/users/promote/{{user.id}}">promote</a> </td>

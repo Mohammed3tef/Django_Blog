@@ -16,4 +16,7 @@ urlpatterns = [
     path('unsubscribe/<cat_id>', views.unsubscribe),
     path('like_post/<id>', views.like_post, name="like_post"),
     path('editcomment/<int:id>/', views.commentEdit, name='commentEdit'),
+    path('deletecomment/<post_id>/<com_id>',
+         views.commentDelete, name='commentDelete'),
+
 ]

@@ -1,0 +1,121 @@
+{% extends 'users/base.html' %} {% block content %} 
+{% include 'manager/nav.html' %}
+<h1>posts</h1>
+<div style="text-align: left" class="ml-3">
+  <a class="btn btn-primary my-3" href="/createpost">Create</a>
+</div>
+<div class="container-fluid">
+  <table style="text-align: center" class="table table-lg table-dark">
+    <thead>
+      <tr style="text-align: center">
+        <th scope="col">Post ID</th>
+        <th scope="col">Post Title</th>
+        <th scope="col">Post content</th>
+        <th scope="col">Publish Date</th>
+        <th scope="col">Likes</th>
+        <th scope="col">Dislikes</th>
+        <th scope="col">Author</th>
+        <th scope="col" colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+
+      <tr class="bg-primary">
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.snippet}}</td>
+        <td>{{post.date_published}}</td>
+        <td>{{post.likes.all.count}}</td>
+        <td>{{post.dislikes.all.count}}</td>
+        <td>{{post.user}}</td>
+        <td><a class="btn btn-warning" href="/post/{{post.id}}">show</a></td>
+        <td>
+          <a
+            class="btn btn-danger"
+            href="/delpost/{{post.id}}"
+            onclick="return confirm('are you sure ?');"
+            >delete</a
+          >
+        </td>
+        <td>
+          <a class="btn btn-success" href="/updatepost/{{post.id}}">Update</a>
+        </td>
+      </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<h1 id="categories">Categories</h1>
+<div style="text-align: left" class="ml-3">
+  <a class="btn btn-primary my-3" href="addcategory">Create</a>
+</div>
+<div class="container-fluid">
+  <table style="text-align: center" class="table table-lg table-dark">
+    <thead>
+      <tr style="text-align: center">
+        <th scope="col">Category ID</th>
+        <th scope="col">Category name</th>
+        <th scope="col">Category Subscribers</th>
+        <th scope="col" colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in categories %}
+      <tr class="bg-primary">
+        <td>{{category.id}}</td>
+        <td>{{category.name}}</td>
+        <td>{{category.user.all.count}}</td>
+        <td>
+          <a class="btn btn-warning" href="/category/{{category.id}}"
+            >Show Posts</a
+          >
+        </td>
+
+        <td>
+          <a
+            class="btn btn-danger"
+            href="delcategory/{{category.id}}"
+            onclick="return confirm('are you sure ?');"
+            >delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<h1 id="forbidden">Profane Words</h1>
+<div style="text-align: left" class="ml-3">
+  <a class="btn btn-primary my-3" href="addprofaneword">Add</a>
+</div>
+<div class="container-fluid">
+  <table style="text-align: center" class="table table-lg table-dark">
+    <thead>
+      <tr style="text-align: center">
+        <th scope="col">ID</th>
+        <th scope="col">Profane Word</th>
+        <th scope="col" colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for profane_word in profane_words %}
+      <tr class="bg-primary">
+        <td>{{profane_word.id}}</td>
+        <td>{{profane_word}}</td>
+        <td>
+          <a
+            class="btn btn-danger"
+            href="delprofaneword/{{profane_word.id}}"
+            onclick="return confirm('are you sure ?');"
+            >delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

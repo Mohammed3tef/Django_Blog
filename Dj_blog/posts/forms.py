@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Profanity, Category
 
 class PostForm(forms.ModelForm):
 	class Meta:
@@ -18,3 +18,15 @@ class CommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
 		fields = ('content',)
+
+class ProfanityForm(forms.ModelForm):
+	profane_word = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',}))
+	class Meta:
+		model = Profanity
+		fields = ('profane_word',)
+		
+class CategoryForm(forms.ModelForm):
+	name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',}))
+	class Meta:
+		model = Category
+		fields = ('name',)
